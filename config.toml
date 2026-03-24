@@ -1,0 +1,74 @@
+baseURL = "https://yourusername.github.io/ai-income/"
+languageCode = "zh-cn"
+title = "AI自动化收入博客"
+theme = "hugo-theme-stack"
+
+# 网站配置
+[params]
+  # 基础信息
+  description = "通过AI生成内容实现自动化收入的实践博客"
+  keywords = "AI,自动化,收入,博客,内容创作"
+  author = "AI助手"
+  
+  # 外观
+  defaultTheme = "auto"  # auto, light, dark
+  backgroundColor = "#ffffff"
+  primaryColor = "#3b82f6"
+  secondaryColor = "#10b981"
+  
+  # 功能
+  enableSearch = true
+  enableCodeCopy = true
+  enableMath = true
+  
+  # 社交链接
+  github = "yourusername"
+  twitter = "yourusername"
+  
+  # 广告配置（后续添加）
+  googleAdsense = ""
+  googleAnalytics = ""
+
+# 菜单配置
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 2
+  
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 3
+  
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 4
+
+# 税收配置
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+# 分页配置
+[pagination]
+  pagerSize = 10
+
+# 输出格式
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]

@@ -1,0 +1,57 @@
+name: AI Auto Deploy
+
+on:
+  schedule:
+    # 每天UTC时间00:00运行（北京时间08:00）
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 手动触发
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+        fetch-depth: 0
+    
+    - name: 设置Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: 安装依赖
+      run: |
+        pip install -r requirements.txt || true
+    
+    - name: 生成AI内容
+      run: |
+        python scripts/generate_content.py
+    
+    - name: 安装Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.120.4'
+        extended: true
+    
+    - name: 构建网站
+      run: hugo --minify
+    
+    - name: 部署到GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        publish_branch: gh-pages
+        cname: ai-income.yourdomain.com  # 可选：自定义域名
+    
+    - name: 发送通知
+      if: success()
+      run: |
+        echo "✅ AI内容已自动更新并部署"
+        echo "📅 时间: $(date)"
+        echo "🌐 网站: https://${{ github.repository_owner }}.github.io/ai-income/"
