@@ -1,7 +1,8 @@
-baseURL = "https://yourusername.github.io/ai-income/"
+baseURL = "https://ooops990.github.io/ai-income/"
 languageCode = "zh-cn"
 title = "AI自动化收入博客"
-theme = "hugo-theme-stack"
+# 使用基本主题，GitHub Actions中可用
+theme = ""
 
 # 网站配置
 [params]
